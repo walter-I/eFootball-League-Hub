@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050816" />
+    <title>eFootball Tournament Management System</title>
+    <meta name="description" content="Modern eFootball tournament management system with club selection, tournaments, chat, and analytics." />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  </head>
+  <body data-page="home">
+    <header class="hero-shell">
+      <nav class="top-nav container">
+        <a class="brand" href="./index.html"><i class="fa-solid fa-futbol"></i> eFootball TMS</a>
+        <div class="nav-actions">
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+          <a class="btn btn-outline" href="./login.html">Login</a>
+          <a class="btn btn-primary" href="./register.html">Register</a>
+        </div>
+      </nav>
+
+      <section class="hero container">
+        <div class="hero-copy" data-aos="fade-right">
+          <p class="eyebrow">Professional Tournament Operations</p>
+          <h1>Run elite eFootball tournaments with confidence.</h1>
+          <p class="hero-text">Manage clubs, fixtures, match approvals, chat, and leaderboards from one modern dashboard built for passionate football communities.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="./register.html">Join the Tournament</a>
+            <a class="btn btn-secondary" href="./admin.html">Admin Portal</a>
+          </div>
+          <div class="hero-stats">
+            <div><strong id="heroPlayers">0</strong><span>Players</span></div>
+            <div><strong>24/7</strong><span>Live Updates</span></div>
+            <div><strong>100%</strong><span>Mobile Ready</span></div>
+          </div>
+        </div>
+        <div class="hero-card" data-aos="fade-left">
+          <div class="glass-card">
+            <h3>Featured Season</h3>
+            <p>Spring Championship 2026</p>
+            <div class="countdown-card">
+              <span>Starts in</span>
+              <div id="heroCountdown">--:--:--:--</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </header>
+
+    <main>
+      <section class="section container" data-aos="fade-up">
+        <div class="section-heading">
+          <p class="eyebrow">Top 10 Leaderboard</p>
+          <h2>See the best performers this season.</h2>
+        </div>
+        <div id="leaderboardPreview" class="leaderboard-grid"></div>
+      </section>
+
+      <section class="section container" data-aos="fade-up">
+        <div class="section-heading">
+          <p class="eyebrow">Core Capabilities</p>
+          <h2>Everything needed for an immersive tournament experience.</h2>
+        </div>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>Admin Oversight</h3>
+            <p>Approve results, manage clubs, lock registrations, and control tournament flow.</p>
+          </article>
+          <article class="feature-card">
+            <i class="fa-solid fa-comments"></i>
+            <h3>Live Chat</h3>
+            <p>Communicate with players, share updates, and keep the community engaged instantly.</p>
+          </article>
+          <article class="feature-card">
+            <i class="fa-solid fa-chart-line"></i>
+            <h3>Analytics</h3>
+            <p>Track player growth, club popularity, match trends, and tournament statistics.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      <p>© <span id="year"></span> eFootball Tournament Management System. Built for modern communities.</p>
+    </footer>
+    <footer class="site-footer">
+      <div class="footer-content">
+        <span class="footer-item"><i class="fa-solid fa-code"></i> developed by syntax_king</span>
+        <span class="footer-item"><i class="fa-regular fa-copyright"></i> 2026</span>
+        <span class="footer-item"><i class="fa-solid fa-circle-question"></i> help</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0711876195</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0783492971</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0768266922</span>
+      </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-storage-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

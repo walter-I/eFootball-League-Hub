@@ -1,0 +1,5 @@
+.dashboard-shell .sidebar { background: linear-gradient(180deg, rgba(3, 8, 20, 0.95), rgba(10, 17, 34, 0.95)); }
+.dashboard-shell .sidebar .brand-wrap { margin-bottom: 1.5rem; }
+.dashboard-shell .sidebar .brand { font-size: 1.05rem; }
+.dashboard-shell .card { background: var(--surface); }
+.dashboard-shell .hero-card { background: linear-gradient(135deg, rgba(0,212,255,0.16), rgba(255,107,53,0.18)); }

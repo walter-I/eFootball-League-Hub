@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard | eFootball TMS</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./dashboard.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" />
+  </head>
+  <body data-page="dashboard">
+    <div class="dashboard-shell">
+      <aside class="sidebar">
+        <div class="brand-wrap"><a class="brand" href="./index.html"><i class="fa-solid fa-futbol"></i> eFootball TMS</a></div>
+        <nav class="sidebar-nav">
+          <a href="#overview"><i class="fa-solid fa-chart-pie"></i> Overview</a>
+          <a href="#clubSection"><i class="fa-solid fa-shield"></i> Club</a>
+          <a href="#tournaments"><i class="fa-solid fa-trophy"></i> Tournaments</a>
+          <a href="#chatSection"><i class="fa-solid fa-comments"></i> Chat</a>
+          <a href="#profileSection"><i class="fa-solid fa-user"></i> Profile</a>
+          <a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </nav>
+      </aside>
+
+      <main class="dashboard-main">
+        <header class="dashboard-header">
+          <div>
+            <p class="eyebrow">Player Dashboard</p>
+            <h1 id="welcomeName">Welcome back</h1>
+          </div>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+        </header>
+
+        <section id="overview" class="dashboard-grid">
+          <article class="card hero-card dashboard-hero" data-aos="fade-up">
+            <div>
+              <p class="eyebrow">Season Status</p>
+              <h2 id="currentSeason">Current Season</h2>
+              <p id="announcementText">Loading announcements...</p>
+            </div>
+            <div class="metric-stack">
+              <div class="metric-pill"><span>Countdown</span><strong id="countdownDisplay">--:--</strong></div>
+              <div class="metric-pill"><span>Online</span><strong id="onlinePlayers">0</strong></div>
+            </div>
+          </article>
+          <article class="card" data-aos="fade-up">
+            <h3>Latest News</h3>
+            <ul id="newsList" class="list-stack"></ul>
+          </article>
+          <article class="card" data-aos="fade-up">
+            <h3>Notifications</h3>
+            <ul id="notificationList" class="list-stack"></ul>
+          </article>
+        </section>
+
+        <section id="clubSection" class="card" data-aos="fade-up">
+          <div class="section-heading">
+            <p class="eyebrow">Club Selection</p>
+            <h2>Choose your one club</h2>
+          </div>
+          <div id="clubContainer" class="club-grid"></div>
+        </section>
+
+        <section id="tournaments" class="dashboard-grid" data-aos="fade-up">
+          <article class="card">
+            <div class="section-heading">
+              <p class="eyebrow">Tournaments</p>
+              <h3>Current competitions</h3>
+            </div>
+            <div id="tournamentContainer" class="stack"></div>
+          </article>
+          <article class="card">
+            <div class="section-heading">
+              <p class="eyebrow">Match Result</p>
+              <h3>Submit a result</h3>
+            </div>
+            <form id="matchResultForm" class="stack">
+              <input type="text" name="homeTeam" placeholder="Home Team" required />
+              <input type="text" name="awayTeam" placeholder="Away Team" required />
+              <input type="text" name="score" placeholder="2-1" required />
+              <input type="date" name="matchDate" required />
+              <input type="file" name="screenshot" accept="image/*" />
+              <button class="btn btn-primary" type="submit">Upload Result</button>
+            </form>
+          </article>
+        </section>
+
+        <section id="chatSection" class="dashboard-grid" data-aos="fade-up">
+          <article class="card chat-card">
+            <div class="section-heading">
+              <p class="eyebrow">Community</p>
+              <h3>Live chat</h3>
+            </div>
+            <div id="chatMessages" class="chat-messages"></div>
+            <form id="chatForm" class="chat-input-row">
+              <input type="text" name="message" placeholder="Say something..." required />
+              <button class="btn btn-primary" type="submit">Send</button>
+            </form>
+          </article>
+          <article class="card">
+            <div class="section-heading">
+              <p class="eyebrow">Leaderboards</p>
+              <h3>Top 10 players</h3>
+            </div>
+            <div id="leaderboardList" class="stack"></div>
+          </article>
+        </section>
+
+        <section id="profileSection" class="dashboard-grid" data-aos="fade-up">
+          <article class="card">
+            <div class="section-heading">
+              <p class="eyebrow">Profile</p>
+              <h3>Player overview</h3>
+            </div>
+            <div id="profileCard" class="profile-card"></div>
+            <label class="upload-box">
+              Upload profile picture
+              <input type="file" id="profileUpload" accept="image/*" />
+            </label>
+          </article>
+          <article class="card">
+            <div class="section-heading">
+              <p class="eyebrow">Match History</p>
+              <h3>Your recent results</h3>
+            </div>
+            <div id="matchHistory" class="stack"></div>
+          </article>
+        </section>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <span class="footer-item"><i class="fa-solid fa-code"></i> developed by syntax_king</span>
+        <span class="footer-item"><i class="fa-regular fa-copyright"></i> 2026</span>
+        <span class="footer-item"><i class="fa-solid fa-circle-question"></i> help</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0711876195</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0783492971</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0768266922</span>
+      </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-storage-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin | eFootball TMS</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./admin.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  </head>
+  <body data-page="admin">
+    <div class="admin-shell">
+      <aside class="sidebar">
+        <div class="brand-wrap"><a class="brand" href="./index.html"><i class="fa-solid fa-futbol"></i> eFootball TMS</a></div>
+        <nav class="sidebar-nav">
+          <a href="#players"><i class="fa-solid fa-users"></i> Players</a>
+          <a href="#clubs"><i class="fa-solid fa-shield"></i> Clubs</a>
+          <a href="#tournamentsAdmin"><i class="fa-solid fa-trophy"></i> Tournaments</a>
+          <a href="#messages"><i class="fa-solid fa-comment-dots"></i> Messages</a>
+          <a href="#analytics"><i class="fa-solid fa-chart-bar"></i> Analytics</a>
+          <a href="#" id="logoutBtn"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+        </nav>
+      </aside>
+      <main class="admin-main">
+        <section class="card" id="adminAuthCard">
+          <div class="section-heading">
+            <p class="eyebrow">Admin Access</p>
+            <h2>Secure staff login</h2>
+          </div>
+          <form id="adminLoginForm" class="auth-form">
+            <label>
+              Admin Email
+              <input type="email" name="adminEmail" placeholder="admin@efootball.com" required />
+            </label>
+            <label>
+              Password
+              <input type="password" name="adminPassword" required />
+            </label>
+            <button class="btn btn-primary btn-block" type="submit">Sign in as Admin</button>
+          </form>
+        </section>
+
+        <div id="adminPortal" class="hidden">
+        <header class="dashboard-header">
+          <div>
+            <p class="eyebrow">Admin Portal</p>
+            <h1>Operations center</h1>
+          </div>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme"><i class="fa-solid fa-moon"></i></button>
+        </header>
+
+        <section class="card" id="players">
+          <div class="section-heading">
+            <p class="eyebrow">Player Management</p>
+            <h2>Search and manage players</h2>
+          </div>
+          <input type="search" id="playerSearch" placeholder="Search players" />
+          <div id="playerTable" class="table-card"></div>
+        </section>
+
+        <section class="card" id="clubs">
+          <div class="section-heading">
+            <p class="eyebrow">Club Management</p>
+            <h2>Assign, lock, and edit clubs</h2>
+          </div>
+          <form id="clubForm" class="stack">
+            <input type="text" name="clubName" placeholder="Club name" required />
+            <input type="text" name="league" placeholder="League" required />
+            <input type="text" name="logo" placeholder="Logo URL" />
+            <button class="btn btn-primary" type="submit">Add Club</button>
+          </form>
+          <div id="clubAdminList" class="club-grid"></div>
+        </section>
+
+        <section class="card" id="tournamentsAdmin">
+          <div class="section-heading">
+            <p class="eyebrow">Tournament Management</p>
+            <h2>Run your season</h2>
+          </div>
+          <form id="tournamentForm" class="stack">
+            <input type="text" name="name" placeholder="Tournament Name" required />
+            <input type="text" name="type" placeholder="Knockout / League / Round Robin" required />
+            <button class="btn btn-primary" type="submit">Create Tournament</button>
+          </form>
+          <div id="adminTournamentList" class="stack"></div>
+        </section>
+
+        <section class="card" id="messages">
+          <div class="section-heading">
+            <p class="eyebrow">Messaging</p>
+            <h2>Send messages to everyone</h2>
+          </div>
+          <form id="announcementForm" class="stack">
+            <input type="text" name="title" placeholder="Title" required />
+            <textarea name="body" rows="3" placeholder="Message body" required></textarea>
+            <button class="btn btn-primary" type="submit">Broadcast</button>
+          </form>
+          <div id="messageBoard" class="stack"></div>
+        </section>
+
+        <section class="card" id="analytics">
+          <div class="section-heading">
+            <p class="eyebrow">Analytics</p>
+            <h2>Season insights</h2>
+          </div>
+          <canvas id="analyticsChart" height="120"></canvas>
+        </section>
+        </div>
+      </main>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <span class="footer-item"><i class="fa-solid fa-code"></i> developed by syntax_king</span>
+        <span class="footer-item"><i class="fa-regular fa-copyright"></i> 2026</span>
+        <span class="footer-item"><i class="fa-solid fa-circle-question"></i> help</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0711876195</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0783492971</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0768266922</span>
+      </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-storage-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

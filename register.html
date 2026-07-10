@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register | eFootball TMS</title>
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  </head>
+  <body data-page="register">
+    <div class="auth-shell">
+      <div class="auth-card" data-aos="zoom-in">
+        <div class="auth-intro">
+          <a class="brand" href="./index.html"><i class="fa-solid fa-futbol"></i> eFootball TMS</a>
+          <h1>Create your account</h1>
+          <p>Join the tournament, claim a club, and compete in the season.</p>
+        </div>
+        <form id="registerForm" class="auth-form">
+          <label>
+            Full Name
+            <input type="text" name="fullName" required />
+          </label>
+          <label>
+            WhatsApp Number
+            <input type="tel" name="whatsapp" placeholder="+255712345678" required />
+          </label>
+          <label>
+            eFootball Username
+            <input type="text" name="efootballUsername" required />
+          </label>
+          <label>
+            Email (optional)
+            <input type="email" name="email" />
+          </label>
+          <label>
+            Password
+            <input type="password" name="password" required />
+          </label>
+          <label>
+            Confirm Password
+            <input type="password" name="confirmPassword" required />
+          </label>
+          <button class="btn btn-primary btn-block" type="submit">Register</button>
+        </form>
+        <p class="auth-link">Already have an account? <a href="./login.html">Login</a></p>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+      <div class="footer-content">
+        <span class="footer-item"><i class="fa-solid fa-code"></i> developed by syntax_king</span>
+        <span class="footer-item"><i class="fa-regular fa-copyright"></i> 2026</span>
+        <span class="footer-item"><i class="fa-solid fa-circle-question"></i> help</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0711876195</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0783492971</span>
+        <span class="footer-item"><i class="fa-brands fa-whatsapp"></i> 0768266922</span>
+      </div>
+    </footer>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.13.1/firebase-storage-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

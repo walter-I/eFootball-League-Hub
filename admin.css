@@ -1,0 +1,4 @@
+.admin-shell .sidebar { background: linear-gradient(180deg, rgba(7, 10, 24, 0.95), rgba(14, 21, 42, 0.95)); }
+.admin-shell .card { margin-bottom: 1rem; }
+.admin-shell .search-box { margin-bottom: 0.8rem; }
+.admin-shell .stack .btn { width: max-content; }
