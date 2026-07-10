@@ -1,30 +1,32 @@
 const firebaseConfig = {
-  apiKey: 'AIzaSyCnCdPpyZ0wExMketB4E4uQ2XmV94V0QdY',
-  authDomain: 'efootball-tms.firebaseapp.com',
-  projectId: 'efootball-tms',
-  storageBucket: 'efootball-tms.appspot.com',
-  messagingSenderId: '1234567890',
-  appId: '1:1234567890:web:abcdef123456'
+  apiKey: '"AIzaSyAEbJZxEJy5ct-m2K_z2cD_V0rxkCA5Cb0"',
+  authDomain: 'efootballhub-61f27.firebaseapp.com',
+  projectId: 'efootballhub-61f27',
+  storageBucket: 'efootballhub-61f27.appspot.com',
+  messagingSenderId: '681958465100',
+  appId: '1:681958465100:web:abcdef123456',
+  measurementId: 'G-WC4RGFR6KM'
 };
 
 let app = null;
 let auth = null;
 let db = null;
 let storage = null;
-let isDemoMode = false;
+let isDemoMode = true;
 
-if (window.firebase?.apps?.length) {
+const shouldUseFirebase = window.__USE_FIREBASE__ === true;
+
+if (shouldUseFirebase && window.firebase?.apps?.length) {
   app = window.firebase.apps[0];
-} else if (window.firebase) {
+} else if (shouldUseFirebase && window.firebase) {
   app = window.firebase.initializeApp(firebaseConfig);
 }
 
-if (app) {
+if (app && shouldUseFirebase) {
   auth = window.firebase.auth();
   db = window.firebase.firestore();
   storage = window.firebase.storage();
-} else {
-  isDemoMode = true;
+  isDemoMode = false;
 }
 
 export { firebaseConfig, app, auth, db, storage, isDemoMode };

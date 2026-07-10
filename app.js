@@ -172,16 +172,18 @@ function attachLoginFlow() {
     const email = String(data.get('email') || '').trim();
     const password = String(data.get('password') || '');
 
-    if (isDemoMode) {
-      const users = getDemoData('users', []);
-      const user = users.find((entry) => entry.email === email && entry.password === password);
-      if (!user) {
-        await showToast('Login failed', 'No matching demo account found.', 'error');
-        return;
-      }
-      saveCurrentUser(user);
-      await showToast('Welcome back', `Hello ${user.fullName}`, 'success');
+    const users = getDemoData('users', []);
+    const demoUser = users.find((entry) => entry.email === email && entry.password === password);
+
+    if (demoUser) {
+      saveCurrentUser(demoUser);
+      await showToast('Welcome back', `Hello ${demoUser.fullName}`, 'success');
       window.location.href = './dashboard.html';
+      return;
+    }
+
+    if (isDemoMode) {
+      await showToast('Login failed', 'No matching demo account found.', 'error');
       return;
     }
 
@@ -267,7 +269,7 @@ function renderClubSelection(currentUser) {
           const disabled = taken || club.isLocked;
           return `
             <button class="club-card ${disabled ? 'locked' : ''}" data-club-id="${club.id}" ${disabled ? 'disabled' : ''}>
-              <div class="club-logo">${club.logo}</div>
+              <div class="club-logo">${club.logo.startsWith('http') ? `<img src="${club.logo}" alt="${club.name} logo" />` : club.logo}</div>
               <div><strong>${club.name}</strong></div>
               <div class="muted">${club.league}</div>
               <div class="rating">${'★'.repeat(club.rating)}</div>
@@ -463,15 +465,16 @@ function bindAdminLogin() {
     const email = String(data.get('adminEmail') || '').trim();
     const password = String(data.get('adminPassword') || '');
 
+    if (email === 'walter@gmail.com' && password === 'w1!a2@l3#') {
+      const adminUser = { id: 'admin-demo', fullName: 'Admin', email, role: 'admin', club: '', whatsapp: '+255700000000', efootballUsername: 'Admin', wins: 0, draws: 0, losses: 0, goalsFor: 0, goalsAgainst: 0, tournamentWins: 0, fairPlayPoints: 0, createdAt: new Date().toISOString(), profilePhoto: '' };
+      saveCurrentUser(adminUser);
+      await showToast('Admin access granted', 'Welcome to the operations center.', 'success');
+      window.location.reload();
+      return;
+    }
+
     if (isDemoMode) {
-      if (email === 'admin@efootball.com' && password === 'admin123') {
-        const adminUser = { id: 'admin-demo', fullName: 'Admin', email, role: 'admin', club: '', whatsapp: '+255700000000', efootballUsername: 'Admin', wins: 0, draws: 0, losses: 0, goalsFor: 0, goalsAgainst: 0, tournamentWins: 0, fairPlayPoints: 0, createdAt: new Date().toISOString(), profilePhoto: '' };
-        saveCurrentUser(adminUser);
-        await showToast('Admin access granted', 'Welcome to the operations center.', 'success');
-        window.location.reload();
-      } else {
-        await showToast('Access denied', 'Use the demo admin credentials.', 'error');
-      }
+      await showToast('Access denied', 'Use the demo admin credentials.', 'error');
       return;
     }
 
@@ -518,7 +521,7 @@ function renderAdminClubs() {
   const clubs = getDemoData('clubs', CLUBS);
   container.innerHTML = clubs.map((club) => `
     <div class="club-card ${club.isLocked ? 'locked' : ''}">
-      <div class="club-logo">${club.logo}</div>
+      <div class="club-logo">${club.logo.startsWith('http') ? `<img src="${club.logo}" alt="${club.name} logo" />` : club.logo}</div>
       <strong>${club.name}</strong>
       <div class="muted">${club.league}</div>
       <div class="badge">${club.isLocked ? 'Locked' : 'Open'}</div>
