@@ -182,11 +182,6 @@ function attachLoginFlow() {
       return;
     }
 
-    if (isDemoMode) {
-      await showToast('Login failed', 'No matching demo account found.', 'error');
-      return;
-    }
-
     try {
       const credential = await auth.signInWithEmailAndPassword(email, password);
       const snapshot = await db.collection('users').doc(credential.user.uid).get();
