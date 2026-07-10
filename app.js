@@ -210,8 +210,8 @@ function attachDashboardFlow() {
   document.getElementById('currentSeason').textContent = 'Spring Championship 2026';
   const announcementText = document.getElementById('announcementText');
   const announcements = getDemoData('announcements', []);
-  const notifications = getDemoData('notifications', []);
-  const latestAnnouncement = announcements[0] || notifications[0];
+  const dashboardNotifications = getDemoData('notifications', []);
+  const latestAnnouncement = announcements[0] || dashboardNotifications[0];
   if (announcementText) announcementText.textContent = latestAnnouncement?.body || 'Registration is open!';
 
   const countdownDisplay = document.getElementById('countdownDisplay');
