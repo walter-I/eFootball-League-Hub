@@ -210,7 +210,9 @@ function attachDashboardFlow() {
   document.getElementById('currentSeason').textContent = 'Spring Championship 2026';
   const announcementText = document.getElementById('announcementText');
   const announcements = getDemoData('announcements', []);
-  if (announcementText) announcementText.textContent = announcements[0]?.body || 'Registration is open!';
+  const notifications = getDemoData('notifications', []);
+  const latestAnnouncement = announcements[0] || notifications[0];
+  if (announcementText) announcementText.textContent = latestAnnouncement?.body || 'Registration is open!';
 
   const countdownDisplay = document.getElementById('countdownDisplay');
   const startDate = new Date('2026-07-15T18:00:00');
@@ -499,20 +501,49 @@ function renderAdminPlayers() {
   const players = getDemoData('users', []);
   container.innerHTML = `
     <table>
-      <thead><tr><th>Name</th><th>Club</th><th>Username</th><th>Wins</th><th>Actions</th></tr></thead>
+      <thead><tr><th>Name</th><th>Email</th><th>WhatsApp</th><th>Club</th><th>Username</th><th>Wins</th><th>Actions</th></tr></thead>
       <tbody>
         ${players.map((player) => `
           <tr>
             <td>${player.fullName}</td>
+            <td>${player.email || '—'}</td>
+            <td>${player.whatsapp || '—'}</td>
             <td>${player.club || '—'}</td>
             <td>${player.efootballUsername}</td>
             <td>${player.wins}</td>
-            <td><button class="btn btn-secondary" data-player-id="${player.id}">Manage</button></td>
+            <td><button class="btn btn-secondary player-detail-button" data-player-id="${player.id}">Details</button></td>
           </tr>
         `).join('')}
       </tbody>
     </table>
   `;
+  attachAdminPlayerDetails();
+}
+
+function attachAdminPlayerDetails() {
+  const buttons = document.querySelectorAll('.player-detail-button');
+  buttons.forEach((button) => {
+    button.onclick = () => {
+      const playerId = button.dataset.playerId;
+      const player = getDemoData('users', []).find((item) => item.id === playerId);
+      if (!player) return;
+      const details = `
+        <p><strong>Name:</strong> ${player.fullName}</p>
+        <p><strong>Email:</strong> ${player.email || '—'}</p>
+        <p><strong>WhatsApp:</strong> ${player.whatsapp || '—'}</p>
+        <p><strong>Username:</strong> ${player.efootballUsername}</p>
+        <p><strong>Club:</strong> ${player.club || '—'}</p>
+        <p><strong>Wins:</strong> ${player.wins}</p>
+        <p><strong>Draws:</strong> ${player.draws}</p>
+        <p><strong>Losses:</strong> ${player.losses}</p>
+      `;
+      if (window.Swal) {
+        window.Swal.fire({ title: 'Player details', html: details, icon: 'info' });
+      } else {
+        window.alert(`Player details:\n\n${player.fullName}\n${player.email || '—'}\n${player.whatsapp || '—'}\n${player.efootballUsername}\n${player.club || '—'}`);
+      }
+    };
+  });
 }
 
 function renderAdminClubs() {
@@ -625,14 +656,23 @@ function bindAdminEvents() {
   announcementForm?.addEventListener('submit', async (event) => {
     event.preventDefault();
     const data = new FormData(announcementForm);
-    const announcements = getDemoData('announcements', []);
-    announcements.unshift({
+    const title = String(data.get('title') || '').trim();
+    const body = String(data.get('body') || '').trim();
+    const announcement = {
       id: crypto.randomUUID(),
-      title: String(data.get('title') || '').trim(),
-      body: String(data.get('body') || '').trim(),
+      title,
+      body,
       createdAt: new Date().toISOString()
-    });
+    };
+
+    const announcements = getDemoData('announcements', []);
+    announcements.unshift(announcement);
     saveDemoData('announcements', announcements);
+
+    const notifications = getDemoData('notifications', []);
+    notifications.unshift(announcement);
+    saveDemoData('notifications', notifications);
+
     renderAnnouncements();
     announcementForm.reset();
     await showToast('Message broadcast', 'Players received the announcement.', 'success');
@@ -644,23 +684,26 @@ function bindAdminEvents() {
     const container = document.getElementById('playerTable');
     if (!container) return;
     const players = getDemoData('users', []);
-    const filtered = players.filter((player) => [player.fullName, player.club, player.efootballUsername].join(' ').toLowerCase().includes(query));
+    const filtered = players.filter((player) => [player.fullName, player.email, player.whatsapp, player.club, player.efootballUsername].join(' ').toLowerCase().includes(query));
     container.innerHTML = `
       <table>
-        <thead><tr><th>Name</th><th>Club</th><th>Username</th><th>Wins</th><th>Actions</th></tr></thead>
+        <thead><tr><th>Name</th><th>Email</th><th>WhatsApp</th><th>Club</th><th>Username</th><th>Wins</th><th>Actions</th></tr></thead>
         <tbody>
           ${filtered.map((player) => `
             <tr>
               <td>${player.fullName}</td>
+              <td>${player.email || '—'}</td>
+              <td>${player.whatsapp || '—'}</td>
               <td>${player.club || '—'}</td>
               <td>${player.efootballUsername}</td>
               <td>${player.wins}</td>
-              <td><button class="btn btn-secondary" data-player-id="${player.id}">Manage</button></td>
+              <td><button class="btn btn-secondary player-detail-button" data-player-id="${player.id}">Details</button></td>
             </tr>
           `).join('')}
         </tbody>
       </table>
     `;
+    attachAdminPlayerDetails();
   });
 }
 
